@@ -1,5 +1,63 @@
+# Virtual Environment
+
+.venv/
+
+venv/
+
+
+
+# Python cache
+
 __pycache__/
+
 *.pyc
+
+
+
+# Jupyter
+
+.ipynb_checkpoints/
+
+
+
+# Trained models
+
+models/
+
+*.pkl
+
+*.joblib
+
+
+
+# Dataset files
+
+data/
+
+*.xlsx
+
+*.csv
+
+
+
+# Streamlit
+
 .streamlit/
-streamlit.log
-streamlit.err.log
+
+
+
+# VS Code
+
+.vscode/
+
+
+
+# OS files
+
+.DS_Store
+
+Thumbs.db
+
+
+# Project documents
+*.pdf
