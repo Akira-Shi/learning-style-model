@@ -20,25 +20,6 @@ __pycache__/
 
 
 
-# Trained models
-
-models/
-
-*.pkl
-
-*.joblib
-
-
-
-# Dataset files
-
-data/
-
-*.xlsx
-
-*.csv
-
-
 
 # Streamlit
 
@@ -57,7 +38,7 @@ data/
 .DS_Store
 
 Thumbs.db
-
+git status
 
 # Project documents
 *.pdf
