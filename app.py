@@ -19,8 +19,9 @@ st.set_page_config(
 )
 
 
-MODEL_PATH = Path("models/learning_style_model.pkl")
-PREPROCESSOR_PATH = Path("models/preprocessor.pkl")
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_PATH = BASE_DIR / "models" / "learning_style_model.pkl"
+PREPROCESSOR_PATH = BASE_DIR / "models" / "preprocessor.pkl"
 TARGET_COLUMN = "Learning Style"
 
 
