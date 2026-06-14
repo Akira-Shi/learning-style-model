@@ -1,12 +1,22 @@
 # Learning Style Classification
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://learning-style-model-az3fasz4y25ytrndpuqyfl.streamlit.app/)
+
 Production-ready machine learning project for classifying student learning styles from academic, behavioral, and environmental features stored in `Student_Performance.xlsx`.
 
 The project includes:
 
-- a training notebook that builds a preprocessing pipeline and trains a balanced `RandomForestClassifier`
-- a Streamlit application for dataset inspection and inference using saved artifacts only
-- reproducible dependencies and setup instructions
+* a training notebook that builds a preprocessing pipeline and trains a balanced `RandomForestClassifier`
+* a Streamlit application for dataset inspection and inference using saved artifacts only
+* reproducible dependencies and setup instructions
+
+## Live Demo
+
+Streamlit Application:
+
+https://learning-style-model-az3fasz4y25ytrndpuqyfl.streamlit.app/
+
+Try the deployed application directly in your browser without any local setup.
 
 ## Project Structure
 
@@ -24,115 +34,182 @@ prototype/
 
 ## Features
 
-- Missing value handling for numeric and categorical columns
-- Standard scaling for numeric features
-- One-hot encoding for categorical features
-- Stratified train-test split
-- Balanced Random Forest training for class imbalance
-- Evaluation with:
-  - Accuracy
-  - Balanced Accuracy
-  - Precision
-  - Recall
-  - F1 Score
-  - ROC-AUC
-  - MCC
-  - Cohen Kappa
-  - Log Loss
-- Confusion matrix visualization
-- Top feature importance visualization
-- Streamlit workflow for upload, overview, model info, and prediction
+* Missing value handling for numeric and categorical columns
+* Standard scaling for numeric features
+* One-hot encoding for categorical features
+* Stratified train-test split
+* Balanced Random Forest training for class imbalance
+* Evaluation with:
+
+  * Accuracy
+  * Balanced Accuracy
+  * Precision
+  * Recall
+  * F1 Score
+  * ROC-AUC
+  * MCC
+  * Cohen Kappa
+  * Log Loss
+* Confusion matrix visualization
+* Top feature importance visualization
+* Interactive Streamlit dashboard for:
+
+  * Dataset upload
+  * Dataset overview
+  * Model information
+  * Learning style prediction
+  * Probability visualization
 
 ## Installation
 
-1. Create and activate a virtual environment.
+### 1. Create and activate a virtual environment
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
-2. Install dependencies.
+### 2. Install dependencies
 
 ```powershell
 pip install -r requirements.txt
 ```
 
-## Training The Model
+## Training the Model
 
-Make sure `Student_Performance.xlsx` is available in the project root, then open and run all cells in [model_training.ipynb](/C:/Akira/University%20Stuff/Sem%202/1.%20AIML/AI%20Lab/AIML%20Project/prototype/model_training.ipynb).
+Make sure `Student_Performance.xlsx` is available in the project root, then open and run all cells in `model_training.ipynb`.
 
 Training will:
 
-- load the dataset
-- build the preprocessing pipeline
-- split the data with stratification
-- train `RandomForestClassifier(class_weight="balanced")`
-- evaluate the model
-- save artifacts to:
-  - `models/learning_style_model.pkl`
-  - `models/preprocessor.pkl`
+* Load the dataset
+* Build the preprocessing pipeline
+* Split the data using stratified train-test split
+* Train a balanced `RandomForestClassifier`
+* Evaluate model performance
+* Save model artifacts
 
-## Run The Streamlit App
+Generated artifacts:
 
-After training artifacts exist:
-
-```powershell
-streamlit run app.py
+```text
+models/
+|-- learning_style_model.pkl
+`-- preprocessor.pkl
 ```
 
-The app supports `.xlsx` and `.csv` uploads and does not retrain the model during inference.
+## Running the Streamlit App
+
+After the model artifacts have been generated:
+
+```powershell
+python -m streamlit run app.py
+```
+
+The application supports `.xlsx` and `.csv` uploads and performs inference using the saved model without retraining.
 
 ## Expected Workflow
 
-1. Place `Student_Performance.xlsx` in the project root if it is not already there.
+1. Place `Student_Performance.xlsx` in the project root if it is not already available.
 2. Install dependencies from `requirements.txt`.
 3. Run all cells in `model_training.ipynb`.
-4. Confirm that the `models/` folder contains both saved `.pkl` files.
-5. Launch the Streamlit app with `streamlit run app.py`.
-6. Upload a dataset for overview and optional batch prediction.
-7. Use the prediction interface to enter a single student profile and view predicted learning style probabilities.
+4. Confirm that the `models/` directory contains:
+
+   * `learning_style_model.pkl`
+   * `preprocessor.pkl`
+5. Launch the Streamlit application.
+6. Upload a dataset for inspection and analysis.
+7. Use the interactive prediction form to classify new student profiles.
+8. View prediction probabilities and model insights.
+
+## Model Evaluation Metrics
+
+The notebook evaluates the trained model using:
+
+* Accuracy
+* Balanced Accuracy
+* Precision
+* Recall
+* F1 Score
+* ROC-AUC
+* Matthews Correlation Coefficient (MCC)
+* Cohen's Kappa
+* Log Loss
+
+Additional visualizations include:
+
+* Confusion Matrix
+* Classification Report
+* Top Feature Importance Plot
 
 ## Dependencies
 
 Core libraries used in this project:
 
-- `pandas`
-- `numpy`
-- `scikit-learn`
-- `joblib`
-- `matplotlib`
-- `seaborn`
-- `plotly`
-- `streamlit`
-- `openpyxl`
+* pandas
+* numpy
+* scikit-learn
+* joblib
+* matplotlib
+* seaborn
+* plotly
+* streamlit
+* openpyxl
+
+Install all dependencies with:
+
+```powershell
+pip install -r requirements.txt
+```
 
 ## Troubleshooting
 
 ### Model files not found
 
-If the app reports missing model artifacts, run the notebook first and verify:
+If the application reports missing model artifacts:
 
-- `models/learning_style_model.pkl`
-- `models/preprocessor.pkl`
+1. Run all cells in `model_training.ipynb`
+2. Verify that the following files exist:
+
+```text
+models/learning_style_model.pkl
+models/preprocessor.pkl
+```
 
 ### Dataset upload is empty
 
-Use a non-empty `.csv` or `.xlsx` file and ensure the file is readable.
+* Ensure the uploaded file is not empty
+* Verify that the file is a valid `.csv` or `.xlsx`
 
 ### Column mismatch during prediction
 
-The uploaded dataset must include the same feature columns used during training. Extra columns are ignored, but required feature columns must be present.
+The uploaded dataset must contain the same feature columns used during training.
 
-### Invalid datatypes
+* Required columns must be present
+* Extra columns are ignored where applicable
 
-If numeric fields are uploaded as text, clean the dataset or convert those columns before prediction.
+### Invalid data types
+
+If numeric fields are interpreted as text:
+
+* Clean the dataset before upload
+* Convert values to appropriate numeric formats
 
 ### Excel file will not load
 
-Make sure `openpyxl` is installed and the file is not corrupted or locked by another application.
+Ensure:
+
+```powershell
+pip install openpyxl
+```
+
+is installed and the Excel file is not corrupted or currently open in another application.
 
 ## Notes
 
-- The Streamlit app performs inference only and intentionally does not retrain the model.
-- The notebook stores metadata on the saved preprocessor object so the app can rebuild forms and validate inputs consistently.
+* The Streamlit application performs inference only and does not retrain the model.
+* Training, evaluation, and artifact generation are handled exclusively by `model_training.ipynb`.
+* Saved preprocessing metadata is used to dynamically generate prediction forms and validate user inputs.
+* The deployed Streamlit application mirrors the local inference workflow.
+
+## Author
+
+Developed as part of an AIML project focused on Learning Style Classification using supervised machine learning and interactive deployment with Streamlit.
